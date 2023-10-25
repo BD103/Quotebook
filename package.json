@@ -2,9 +2,10 @@
   "private": true,
   "type": "module",
   "scripts": {
-    "build": "pnpm build:query && nuxt build",
+    "build": "./bins/build.sh",
+    "build:partial": "pnpm build:query && nuxt build",
     "build:query": "pnpm exec generate queries --target ts",
-    "clean": "nuxi cleanup && rm -rf queries/*.query.ts",
+    "clean": "nuxi cleanup && rm -rf queries/*.query.ts quotebook.tar.gz",
     "dev": "nuxt dev",
     "generate": "pnpm build:query && nuxt generate",
     "preview": "nuxt preview",
