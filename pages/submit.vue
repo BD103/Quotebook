@@ -28,7 +28,7 @@ const model = ref<{
     character?: string,
 }>({});
 
-const { formRef, rules, pending, apiErrors, onSubmit, edited, reset } = useNaiveForm(model);
+const { formRef, rules, pending, onSubmit, edited } = useNaiveForm(model);
 
 const { data: members, pending: membersPending } = await useLazyFetch("/api/characters");
 
@@ -51,5 +51,7 @@ async function handleSubmit() {
         method: "post",
         body: { content: model.value.quote, character: model.value.character },
     });
+
+    await navigateTo("/quotes");
 }
 </script>
