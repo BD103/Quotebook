@@ -33,3 +33,10 @@ export function authTokenSecret(): Uint8Array {
 
     return new TextEncoder().encode(tokenSecret);
 }
+
+export type AuthJwtBody = {
+    // uuid
+    uid: string,
+    // username
+    usn: string,
+};
