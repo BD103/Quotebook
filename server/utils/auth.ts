@@ -1,4 +1,5 @@
 import * as argon2 from "@node-rs/argon2";
+import type { H3Event } from "h3";
 
 const ARGON2_OPTIONS: argon2.Options = {
     // Parameters taken from OWASP cheatsheet
@@ -40,3 +41,14 @@ export type AuthJwtBody = {
     // username
     usn: string,
 };
+
+export function authRequireLogin(event: H3Event): AuthJwtBody {
+    if (event.context.auth == null) {
+        throw createError({
+            statusCode: 401,
+            statusMessage: "Client is unauthenticated.",
+        });
+    }
+
+    return event.context.auth as AuthJwtBody;
+}

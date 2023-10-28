@@ -4,6 +4,8 @@ import { allQuotes } from "~/queries/allQuotes.query";
 const client = createClient();
 
 export default defineEventHandler(async (event) => {
+    authRequireLogin(event);
+
     const args = getQuery(event);
 
     let offset, limit;
