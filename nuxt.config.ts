@@ -18,6 +18,9 @@ export default defineNuxtConfig({
             },
         },
     },
+    runtimeConfig: {
+        tokenSecret: "",
+    },
     typescript: {
         shim: false,
     },

@@ -15,6 +15,21 @@ export function authHash(password: string): Promise<string> {
     return argon2.hash(password, ARGON2_OPTIONS);
 }
 
-export async function authVerify(hashed: string, password: string): Promise<boolean> {
+export function authVerify(hashed: string, password: string): Promise<boolean> {
     return argon2.verify(hashed, password, ARGON2_OPTIONS);
+}
+
+export const AUTH_TOKEN_ALG = "HS256";
+
+export function authTokenSecret(): Uint8Array {
+    const { tokenSecret } = useRuntimeConfig();
+
+    if (tokenSecret === "") {
+        throw createError({
+            statusCode: 500,
+            statusMessage: "Token secret has not been configured.",
+        });
+    }
+
+    return new TextEncoder().encode(tokenSecret);
 }
