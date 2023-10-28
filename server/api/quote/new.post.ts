@@ -5,6 +5,8 @@ import type { NewQuoteArgs } from "~/queries/newQuote.query";
 const client = createClient();
 
 export default defineEventHandler(async (event) => {
+    authRequireLogin(event);
+
     const body = await readBody<NewQuoteArgs>(event);
 
     const res = await newQuote(client, body);
